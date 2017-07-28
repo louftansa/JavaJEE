@@ -1,7 +1,10 @@
 package com.mas.bookstore.repository;
 
 import com.mas.bookstore.model.Book;
+import com.mas.bookstore.util.NumberGenerator;
+import com.mas.bookstore.util.TextUtil;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -16,6 +19,12 @@ public class BookRepository {
 
     @PersistenceContext(unitName = "bookStorePU")
     private EntityManager em;
+
+    @Inject
+    private TextUtil textUtil;
+
+    @Inject
+    private NumberGenerator numberGenerator;
 
     public List<Book> findAll(){
        TypedQuery<Book>  query = em.createQuery("SELECT b from Book b order by b.title desc", Book.class);
@@ -33,6 +42,8 @@ public class BookRepository {
 
     @Transactional(REQUIRED)
     public Book createBook(@NotNull Book book) {
+        book.setTitle(textUtil.sanitize(book.getTitle()));
+        book.setIsbn(numberGenerator.generateIsbnNumber());
         em.persist(book);
         return book;
     }
