@@ -35,6 +35,16 @@ public class BookRepositoryTest {
     }
 
     @Test(expected = Exception.class)
+    public void createNullBook() {
+        bookRepository.createBook(null);
+    }
+
+    @Test(expected = Exception.class)
+    public void findWithInvalidId() {
+        bookRepository.findBook(null);
+    }
+
+    @Test(expected = Exception.class)
     public void createInvalidBook() {
         Book book = new Book(null, "A java ee book", 2.4f, "14324443", new Date(), 100, "http://nothing.com", Language.ENGLISH);
         bookRepository.createBook(book);
