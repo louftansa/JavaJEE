@@ -14,7 +14,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
-
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -52,7 +51,7 @@ public class BookRepositoryTest {
 
     @Test(expected = Exception.class)
     public void createInvalidBook() {
-        Book book = new Book(null, "A java ee book", 2.4f, "14324443", new Date(), 100, "http://nothing.com", Language.ENGLISH);
+        Book book = new Book("14324443", null, "http://nothing.com", Language.ENGLISH, 2.4f, 100 , new Date(),   "A java ee book");
         bookRepository.createBook(book);
     }
 
@@ -60,8 +59,7 @@ public class BookRepositoryTest {
     public void create() {
         assertEquals(Long.valueOf(0), bookRepository.countAll());
         assertEquals(0, bookRepository.findAll().size());
-
-        Book book = new Book("JavaEE  book", "A java ee book", 2.4f, "14324443", new Date(), 100, "http://nothing.com", Language.ENGLISH);
+        Book book = new Book("14324443", "JavaEE  book","http://nothing.com", Language.ENGLISH, 2.4f,100,   new Date(),   "A java ee book");
         book = bookRepository.createBook(book);
         Long bookId = book.getId();
         assertNotNull(bookId);

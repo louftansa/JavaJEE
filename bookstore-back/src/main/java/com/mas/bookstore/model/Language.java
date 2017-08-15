@@ -1,8 +1,5 @@
 package com.mas.bookstore.model;
 
 public enum Language {
-    FRENCH,
-    ENGLISH,
-    SPAIN,
-    DEUTSCH;
+    ENGLISH, FRENCH, SPANISH, PORTUGUESE, ITALIAN, FINISH, GERMAN, DEUTSCH, RUSSIAN
 }
